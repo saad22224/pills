@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('price');
             $table->date('date');
             $table->text('description');
-            $table->string('expenses_image');
+            $table->string('expenses_image')->nullable();
             $table->string('type');
             $table->string('provider');
             $table->timestamps();

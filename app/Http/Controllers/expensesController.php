@@ -41,12 +41,14 @@ class expensesController extends Controller
             'price' => 'required|numeric|min:1|max:10000',
             'date' => 'required|date',
             'description' => 'required|string|max:1000',
-            'expenses_image' => 'mimes:jpeg,png,jpg,gif,svg,pdf|max:10240',
+            'expenses_image' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf|max:10240', // الصورة اختيارية
             'type' => 'required|string',
             'provider' => 'required|string',
         ]);
 
         try {
+            $filename = null; // تعريف المتغير بقيمة افتراضية
+
             // التحقق إذا كان الملف موجودًا
             if ($request->hasFile('expenses_image')) {
                 $file = $request->file('expenses_image');
@@ -55,13 +57,7 @@ class expensesController extends Controller
                 if ($file->isValid()) {
                     $filename = $file->getClientOriginalName();
                     $file->storeAs('public/expenses', $filename);
-                } else {
-                    // إذا كانت المشكلة في رفع الملف
-                    return "error, 'File is not valid!";
                 }
-            } else {
-                // إذا لم يتم رفع الملف
-                return "error Please upload an expenses image ";
             }
 
             // إضافة البيانات إلى قاعدة البيانات
@@ -73,11 +69,12 @@ class expensesController extends Controller
                 'description' => $request->description,
                 'type' => $request->type,
                 'provider' => $request->provider,
-                'expenses_image' => $filename,
+                'expenses_image' => $filename, // يمكن أن يكون null إذا لم يتم رفع صورة
             ]);
-            return redirect()->route('expenses.index')->with('success', 'Invoice added successfully');
+
+            return redirect()->route('expenses.index')->with('success', 'Expense added successfully');
         } catch (\Exception $e) {
-            return "error" . $e->getMessage();
+            return "error: " . $e->getMessage();
         }
     }
 

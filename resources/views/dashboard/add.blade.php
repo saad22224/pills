@@ -209,29 +209,29 @@
                                     </fieldset>
                                 </div>
                                 <div dir="rtl" class="wg-box">
-                                    <fieldset>
-                                        <div class="body-title mb-10">ارفق الصور </div>
+                                <fieldset>
+                                        <div class="body-title mb-10">ارفق الصور</div>
                                         <div class="upload-image mb-16">
                                             <div class="item">
                                                 <img src="images/upload/upload-1.png" alt="">
                                             </div>
                                             <div class="item">
-                                                <img id="imagePreview" src="" alt="">
+                                                <!-- المعاينة هنا -->
+                                                <img id="imagePreview" src="" alt="" style="max-width: 100%; height: auto;">
                                             </div>
                                             <div class="item up-load">
                                                 <label class="uploadfile" for="myFile">
                                                     <span class="icon">
                                                         <i class="icon-upload-cloud"></i>
                                                     </span>
-                                                    <span class="text-tiny">أسقط صورك هنا أو اختر <span
-                                                            class="tf-color">click to browse</span></span>
-                                                    <input type="file" id="myfile" name="invoice_image">
+                                                    <span class="text-tiny">أسقط صورك هنا أو اختر <span class="tf-color">click to browse</span></span>
+                                                    <input type="file" id="myFile" name="invoice_image" accept="image/*" onchange="previewImage(event)">
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="body-text">تحتاج إلى إضافة 4 صور على الأقل. انتبه إلى جودة الصور
-                                            التي تضيفها، والتزم بمعايير ألوان الخلفية. يجب أن تكون الصور بأبعاد
-                                            معينة. لاحظ أن المنتج يظهر كافة التفاصيل</div>
+                                        <div class="body-text">
+                                            تحتاج إلى إضافة 4 صور على الأقل. انتبه إلى جودة الصور التي تضيفها، والتزم بمعايير ألوان الخلفية. يجب أن تكون الصور بأبعاد معينة. لاحظ أن المنتج يظهر كافة التفاصيل.
+                                        </div>
                                     </fieldset>
 
 
