@@ -69,7 +69,7 @@
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="{{route('incomePage.index')}}" class="">
+                                        <a href="{{route('income.index')}}" class="">
                                                 <div class="text">income</div>
                                             </a>
                                         </li>

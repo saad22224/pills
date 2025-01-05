@@ -112,7 +112,7 @@
                                                 </a>
                                             </li>
                                             <li class="sub-menu-item">
-                                                <a href="{{route('incomePage.index')}}" class="">
+                                            <a href="{{route('income.index')}}" class="">
                                                     <div class="text">income</div>
                                                 </a>
                                             </li>
@@ -209,7 +209,7 @@
                                     </div>
                                     <div class="flex items-center justify-between gap10 flex-wrap">
                                         <div class="wg-filter flex-grow">
-
+<!--
                                             <form class="form-search">
                                                 <fieldset class="name">
                                                     <input type="search" placeholder="Search here..." class="" name="name"
@@ -218,7 +218,7 @@
                                                 <div class="button-submit">
                                                     <button class="" type="submit"><i class="icon-search"></i></button>
                                                 </div>
-                                            </form>
+                                            </form> -->
                                         </div>
                                         <a class="tf-button style-1 w208" href="{{route('addpage.index')}}"><i
                                                 class="icon-plus"></i>add invoices</a>

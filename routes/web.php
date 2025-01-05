@@ -3,6 +3,7 @@
 use App\Exports\invoisesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\expensesController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\invoicesControlle;
 use App\Http\Controllers\Invoices_ExportController;
 use App\Http\Controllers\PostController;
@@ -62,4 +63,9 @@ Route::middleware('auth')->group(function () {
 // expenses
 Route::middleware('auth')->group(function () {
     Route::resource('expenses', expensesController::class);
+});
+
+// incomes
+Route::middleware('auth')->group(function () {
+    Route::resource('income', IncomeController::class);
 });

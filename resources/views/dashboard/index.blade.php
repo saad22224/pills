@@ -33,6 +33,21 @@
             position: absolute;
             top: 90%;
         }
+
+        .mobile_nav {
+            display: block !important;
+            position: relative;
+            top: 40%;
+            right: 30%;
+        }
+    }
+    @media(max-width:450px){
+        .mobile_nav {
+            display: block !important;
+            position: relative;
+            top: 60%;
+            right: 30%;
+        }
     }
 </style>
 
@@ -107,20 +122,52 @@
                                                 </a>
                                             </li>
                                             <li class="sub-menu-item">
-                                                <a href="{{route('incomePage.index')}}" class="">
+                                                <a href="{{route('income.index')}}" class="">
                                                     <div class="text">income</div>
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
 
-                                </ul>
-                                </li>
-
-                                </ul>
                             </div>
+                            </ul>
+                            </li>
+
                         </div>
                     </div>
+                     <!-- mobile  -->
+                     <div class="popup-wrap mobile_nav user type-header" style="display: none;">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="header-user wg-user">
+                                            <span class="image">
+                                                <img src="images/avatar/user-1.png" alt="">
+                                            </span>
+                                            <span class="flex flex-column">
+                                                <span class="body-title mb-2">{{auth()->user()->name}}</span>
+                                            </span>
+                                        </span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end has-content"
+                                        aria-labelledby="dropdownMenuButton3">
+                                        <li>
+
+                                            <form action="{{ route('logout') }}" method="POST">
+                                                @csrf
+                                                <button type="submit" style="background: none; border: none; padding: 0;">
+                                                    <div class="icon">
+                                                        <i class="icon-log-out"></i>
+                                                    </div>
+                                                    <div class="body-title-2">Log out</div>
+                                                </button>
+                                            </form>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                </ul>
+                            </div>
                 </div>
                 <!-- /section-menu-left -->
                 <!-- section-content-right -->
@@ -143,7 +190,7 @@
                                     <i class="icon-moon"></i>
                                 </div>
                                 <div class="popup-wrap noti type-header">
-                                    <div class="dropdown">
+                                    <!-- <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-item">
@@ -151,7 +198,7 @@
                                                 <i class="icon-bell"></i>
                                             </span>
                                         </button>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="header-item button-zoom-maximize">
                                     <div class="">

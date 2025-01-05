@@ -160,75 +160,70 @@
                         <!-- main-content-wrap -->
                         <div class="main-content-wrap" id="invoices" >
                             <!-- form-add-product -->
-                            <form class="tf-section-2 form-add-product" enctype="multipart/form-data" action="{{route('invoices.update' , $invoice->id)}}" method="Post">
+                            <form class="tf-section-2 form-add-product" enctype="multipart/form-data" action="{{route('income.update' , $income->id)}}" method="Post">
                                 @csrf
                                 @method('PUT')
                                 <div dir="rtl" class="wg-box">
+                                    <!-- اسم الدخل -->
                                     <fieldset class="name">
-                                        <div class="body-title mb-10"> invoices name <span class="tf-color-1">*</span>
-                                        </div>
-                                        <input class="mb-10" type="text"  placeholder="invoices name" name="title"
-                                            tabindex="0" value="{{$invoice->title}}" aria-required="true" required="">
-                                        <div class="text-tiny">لا تتجاوز 20 حرفًا عند إدخال المنتج
-                                            اسم.</div>
+                                        <div class="body-title mb-10">income name <span class="tf-color-1">*</span></div>
+                                        <input value="{{$income->title}}" class="mb-10" type="text" placeholder="income name" name="title" tabindex="0" required>
                                     </fieldset>
 
-                                    <div class="gap22 cols">
+                                    <!-- اختيار نوع الدخل -->
+                                    <select name="income_type"  id="income_type" required>
+                                        <option value="choose" disabled selected>income type</option>
+                                        <option value="side_job">side job</option>
+                                        <option value="company_job">company job</option>
+                                    </select>
+
+                                    <!-- حقل job number يظهر فقط عند اختيار side job -->
+                                    <div id="job_number_field" style="display: none;">
                                         <fieldset class="category">
-                                            <div class="body-title mb-10">price <span class="tf-color-1">*</span>
-                                            </div>
-                                            <div class="">
-                                                <input name="price" type="number" value="{{$invoice->price}}"  placeholder="price">
-                                            </div>
+                                            <div class="body-title mb-10">job number <span class="tf-color-1">*</span></div>
+                                            <input id="job_number" name="job_number" type="number" placeholder="job number" min="1">
                                         </fieldset>
                                     </div>
 
+                                    <!-- اختيار cash type يظهر فقط عند اختيار company job -->
+                                    <div id="cash_type_field" style="display: none;">
+                                        <select name="cash_type" id="cash_type">
+                                            <option value="choose" disabled selected>cash type</option>
+                                            <option value="cash_in_hand">cash in hand</option>
+                                            <option value="cash_app">cash app</option>
+                                            <option value="credit">credit</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- حقل amount -->
                                     <div class="gap22 cols">
                                         <fieldset class="category">
-                                            <div class="body-title mb-10">Date <span class="tf-color-1">*</span></div>
-                                            <div>
-                                                <input name="date" value="{{$invoice->date}}"  type="date" id="date" placeholder="Date" lang="en">
-                                            </div>
+                                            <div class="body-title mb-10">amount <span class="tf-color-1">*</span></div>
+                                            <input id="amount" name="amount" type="number" placeholder="amount" min="1" required>
                                         </fieldset>
                                     </div>
 
+                                    <!-- حقل التواريخ -->
+                                    <div class="gap22 cols">
+                                        <fieldset class="category">
+                                            <div class="body-title  mb-10">from <span class="tf-color-1">*</span></div>
+                                            <input value="{{$income->date_from}}" name="date_from" id="date" type="date" required>
+                                        </fieldset>
+                                    </div>
+                                    <div class="gap22 cols">
+                                        <fieldset class="category">
+                                            <div class="body-title mb-10">to <span class="tf-color-1">*</span></div>
+                                            <input name="date_to" value="{{$income->date_to}}"  id="date" type="date" required>
+                                        </fieldset>
+                                    </div>
 
-                                    <fieldset class="description">
-                                        <div class="body-title mb-10">description <span class="tf-color-1">*</span>
-                                        </div>
-                                        <textarea  class="mb-10" name="description" placeholder="description" tabindex="0"
-                                            aria-required="true" required="">{{$invoice->description }} </textarea>
-                                        <div class="text-tiny">لا تتجاوز 100 حرف عند الدخول
-                                            اسم المنتج.</div>
-                                    </fieldset>
-                                </div>
-                                <div dir="rtl" class="wg-box">
-                                    <fieldset>
-                                        <div class="body-title mb-10">ارفق الصور </div>
-                                        <div class="upload-image mb-16">
-                                            <div class="item">
-                                                <img src="images/upload/upload-1.png" alt="">
-                                            </div>
-                                            <div class="item">
-                                                <img src="{{ asset('storage/invoices/' . $invoice->invoice_image) }}" alt="">
-                                            </div>
-                                            <div class="item up-load">
-                                                <label class="uploadfile" for="myFile">
-                                                    <span class="icon">
-                                                        <i class="icon-upload-cloud"></i>
-                                                    </span>
-                                                    <span class="text-tiny">أسقط صورك هنا أو اختر <span
-                                                            class="tf-color">click to browse</span></span>
-                                                    <input type="file" value="{{$invoice->invoice_image }} " id="myFile"  name="invoice_image">
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="body-text">تحتاج إلى إضافة 4 صور على الأقل. انتبه إلى جودة الصور
-                                            التي تضيفها، والتزم بمعايير ألوان الخلفية. يجب أن تكون الصور بأبعاد
-                                            معينة. لاحظ أن المنتج يظهر كافة التفاصيل</div>
-                                    </fieldset>
+                                    <!-- عرض وحفظ total amount -->
+                                    <div>
+                                        <span>total amount:</span>
+                                        <input type="text" id="total_amount"  name="total_amount" value="{{$income->total_amount}}" readonly>
+                                    </div>
 
-
+                                    <!-- زر الإضافة -->
                                     <div class="col-12">
                                         <button class="tf-button w-full" type="submit">اضافة المنتج</button>
                                     </div>
@@ -260,6 +255,54 @@
             locale: "en" // اللغة
         });
     })
+
+        // عناصر HTML
+        const incomeType = document.getElementById('income_type');
+    const jobNumberField = document.getElementById('job_number_field');
+    const jobNumberInput = document.getElementById('job_number');
+    const cashTypeField = document.getElementById('cash_type_field');
+    const amountInput = document.getElementById('amount');
+    const totalAmountInput = document.getElementById('total_amount');
+
+    // تحديث العرض بناءً على نوع الدخل
+    incomeType.addEventListener('change', () => {
+        const selectedType = incomeType.value;
+        if (selectedType === 'side_job') {
+            jobNumberField.style.display = 'block';
+            cashTypeField.style.display = 'none';
+        } else if (selectedType === 'company_job') {
+            jobNumberField.style.display = 'none';
+            cashTypeField.style.display = 'block';
+        } else {
+            jobNumberField.style.display = 'none';
+            cashTypeField.style.display = 'none';
+        }
+        calculateTotal();
+    });
+
+    // حساب total amount عند إدخال القيم
+    jobNumberInput.addEventListener('input', calculateTotal);
+    amountInput.addEventListener('input', calculateTotal);
+    incomeType.addEventListener('change', calculateTotal);
+
+    function calculateTotal() {
+        const amount = parseFloat(amountInput.value) || 0;
+        const jobNumber = parseInt(jobNumberInput.value) || 0;
+        const selectedType = incomeType.value;
+
+        let totalAmount = amount;
+
+        if (selectedType === 'side_job') {
+            totalAmount = amount - (jobNumber * 3);
+        } else if (selectedType === 'company_job') {
+            const cashType = document.getElementById('cash_type').value;
+            if (cashType === 'credit') {
+                totalAmount = amount - (amount * 0.03);
+            }
+        }
+
+        totalAmountInput.value = totalAmount.toFixed(2);
+    }
 </script>
 </body>
 

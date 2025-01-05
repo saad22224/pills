@@ -71,7 +71,7 @@
                                                 </a>
                                             </li>
                                             <li class="sub-menu-item">
-                                                <a href="{{route('incomePage.index')}}" class="">
+                                            <a href="{{route('income.index')}}" class="">
                                                     <div class="text">income</div>
                                                 </a>
                                             </li>
@@ -159,8 +159,8 @@
                             <!-- main-content-wrap -->
                             <div class="main-content-wrap">
 
-                                <!-- product-list -->
-                                <div class="wg-box">
+                               <!-- product-list -->
+                               <div class="wg-box">
                                     <div class="title-box">
                                         <i class="icon-coffee"></i>
                                         <div class="body-text">نصيحة للبحث حسب معرف المنتج: يتم تزويد كل منتج بمعرف فريد
@@ -170,93 +170,89 @@
                                         <div class="wg-filter flex-grow">
 
                                             <form class="form-search">
-                                                <fieldset class="name">
-                                                    <input type="text" placeholder="Search here..." class="" name="name"
-                                                        tabindex="2" value="" aria-required="true" required="">
-                                                </fieldset>
+
                                                 <div class="button-submit">
-                                                    <button class="" type="submit"><i class="icon-search"></i></button>
+                                                    <!-- <button class="" type="submit"><i class="icon-search"></i></button> -->
                                                 </div>
                                             </form>
                                         </div>
-                                        <a class="tf-button style-1 w208" href="add-product.html"><i
-                                                class="icon-plus"></i>اضافة منتج</a>
+                                        <a class="tf-button style-1 w208" href="{{route('addpage.index')}}"><i
+                                                class="icon-plus"></i>add income</a>
+
+
                                     </div>
                                     <div class="wg-table table-product-list">
                                         <ul class="table-title flex gap20 mb-14">
                                             <li>
-                                                <div class="body-title">اسم المنتج</div>
+                                                <div class="body-title">invoice name</div>
                                             </li>d
+
                                             <li>
-                                                <div class="body-title">رقم المنتج</div>
+                                                <div class="body-title">price</div>
                                             </li>
                                             <li>
-                                                <div class="body-title">السعر</div>
+                                                <div class="body-title">date from</div>
                                             </li>
                                             <li>
-                                                <div class="body-title">القسم</div>
+                                                <div class="body-title">date to</div>
                                             </li>
                                             <li>
-                                                <div class="body-title">المحافظة</div>
+                                                <div class="body-title">income type</div>
                                             </li>
                                             <li>
-                                                <div class="body-title">الولاية</div>
-                                            </li>
-                                            <li>
-                                                <div class="body-title">الاضافات</div>
+                                                <div class="body-title">roles</div>
                                             </li>
                                         </ul>
+                                        @foreach($incomes as $income)
+
+
                                         <ul class="flex flex-column">
                                             <li class="product-item gap14">
-                                                <div class="image no-bg">
-                                                    <img src="images/products/41.png" alt="">
-                                                </div>
+
                                                 <div class="flex items-center justify-between gap20 flex-grow">
                                                     <div class="name">
-                                                        <a href="product-list.html" class="body-title-2">Dog Food,
-                                                            Chicken & Chicken Liver Recipe...</a>
+                                                        <a href="product-list.html" class="body-title-2">
+                                                            {{$income->title}} </a>
                                                     </div>
-                                                    <div class="body-text">#7712309</div>
-                                                    <div class="body-text">$1,452.500</div>
-                                                    <div class="body-text">1,638</div>
+                                                    <div class="body-text"  style="transform:translateX(30%)"> {{$income->total_amount}}</div>
+
+                                                    <div class="body-text"  style="transform:translateX(17%)"> {{$income->date_from}}</div>
+                                                    <div class="body-text"> {{$income->date_to}}</div>
+                                                    <div class="body-text"> {{$income->income_type}}</div>
 
 
-                                                    <div class="body-text">$28,672.36</div>
-                                                    <div class="body-text">$28,672.36</div>
+
                                                     <div class="list-icon-function">
 
                                                         <div class="item edit">
-                                                            <i class="icon-edit-3"></i>
+                                                            <a href="{{route('income.edit',$income->id)}}">
+
+                                                                <i class="icon-edit-3"></i>
+                                                            </a>
                                                         </div>
-                                                        <div class="item trash">
-                                                            <i class="icon-trash-2"></i>
-                                                        </div>
+                                                        <form action="{{ route('income.destroy', $income->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+
+                                                            <button type="submit" class="i" onclick="return confirm('Are you sure you want to delete this invoice?')">
+                                                                <i class="icon-trash-2"></i>
+                                                            </button>
+                                                        </form>
+
                                                     </div>
                                                 </div>
                                             </li>
                                         </ul>
+                                        @endforeach
                                     </div>
                                     <div class="divider"></div>
                                     <div class="flex items-center justify-between flex-wrap gap10">
                                         <div class="text-tiny">Showing 10 entries</div>
-                                        <ul class="wg-pagination">
-                                            <li>
-                                                <a href="#"><i class="icon-chevron-left"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#">1</a>
-                                            </li>
-                                            <li class="active">
-                                                <a href="#">2</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">3</a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="icon-chevron-right"></i></a>
-                                            </li>
-                                        </ul>
+                                        {{ $incomes->links('pagination::bootstrap-5') }}
+                                        <a href="#"><i class="icon-chevron-right"></i></a>
                                     </div>
+
+                                    <!-- /product-list -->
                                 </div>
                                 <!-- /product-list -->
                             </div>

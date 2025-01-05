@@ -41,7 +41,7 @@ class expensesController extends Controller
             'price' => 'required|numeric|min:1|max:10000',
             'date' => 'required|date',
             'description' => 'required|string|max:1000',
-            'expenses_image' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf|max:10240', // الصورة اختيارية
+            'expenses_image' => 'mimes:jpeg,png,jpg,gif,svg,pdf|max:10240', // الصورة اختيارية
             'type' => 'required|string',
             'provider' => 'required|string',
         ]);
