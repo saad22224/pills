@@ -42,10 +42,12 @@ class invoicesControlle extends Controller
             'price' => 'required|numeric|min:1|max:10000',
             'date' => 'required|date',
             'description' => 'required|string|max:1000',
-            'invoice_image' => 'mimes:jpeg,png,jpg,gif,svg,pdf|max:10240',
+            'invoice_image' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf|max:10240', // الصورة اختيارية
         ]);
 
         try {
+            $filename = null; // تعريف المتغير بقيمة افتراضية
+
             // التحقق إذا كان الملف موجودًا
             if ($request->hasFile('invoice_image')) {
                 $file = $request->file('invoice_image');
@@ -54,13 +56,7 @@ class invoicesControlle extends Controller
                 if ($file->isValid()) {
                     $filename = $file->getClientOriginalName();
                     $file->storeAs('public/invoices', $filename);
-                } else {
-                    // إذا كانت المشكلة في رفع الملف
-                    return "error, 'File is not valid!";
                 }
-            } else {
-                // إذا لم يتم رفع الملف
-                return "error Please upload an invoice image";
             }
 
             // إضافة البيانات إلى قاعدة البيانات
@@ -70,14 +66,15 @@ class invoicesControlle extends Controller
                 'price' => $request->price,
                 'date' => $request->date,
                 'description' => $request->description,
-                'invoice_image' => $filename,
+                'invoice_image' => $filename, // يمكن أن يكون null إذا لم يتم رفع صورة
             ]);
 
             return redirect()->route('invoices.index')->with('success', 'Invoice added successfully');
         } catch (\Exception $e) {
-            return "error". $e->getMessage();
+            return "error: " . $e->getMessage();
         }
     }
+
 
 
     /**
