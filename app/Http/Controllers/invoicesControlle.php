@@ -12,12 +12,24 @@ class invoicesControlle extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // $invoices = Invoices::where('user_id', auth()->id())->get();
-        $invoices = auth()->user()->invoices()->paginate(5);
-        return view('dashboard.invoices' , compact('invoices'));
+        // جلب جميع الفواتير بشكل افتراضي
+        $query = Invoices::query();
+
+        // التحقق من وجود تواريخ للفلترة
+        if ($request->has('date')  && $request->date) {
+            // إذا تم اختيار تواريخ، يتم فلترة النتائج
+            $query->where('date', $request->date);
+        }
+
+        // جلب النتائج مع ترقيم الصفحات
+        $invoices = $query->paginate(10);
+
+        // عرض الصفحة مع النتائج
+        return view('dashboard.invoices', compact('invoices'));
     }
+
 
     /**
      * Show the form for creating a new resource.

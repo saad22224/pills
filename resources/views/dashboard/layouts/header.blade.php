@@ -28,8 +28,11 @@
     <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ asset('admin/images/favicon.png') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- تحميل مكتبة jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-
+    <!-- تحميل مكتبة jsPDF-AutoTable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.0/jspdf.plugin.autotable.min.js"></script>
 </head>
 
 <body>

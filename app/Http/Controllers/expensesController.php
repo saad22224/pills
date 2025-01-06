@@ -12,9 +12,21 @@ class expensesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $expenses = auth()->user()->expenses()->paginate(5);
+        // جلب جميع الفواتير بشكل افتراضي
+        $query = expenses::query();
+
+        // التحقق من وجود تواريخ للفلترة
+        if ($request->has('date')  && $request->date) {
+            // إذا تم اختيار تواريخ، يتم فلترة النتائج
+            $query->where('date', $request->date);
+        }
+
+        // جلب النتائج مع ترقيم الصفحات
+        $expenses = $query->paginate(10);
+
+        // عرض الصفحة مع النتائج
         return view('dashboard.expenses', compact('expenses'));
     }
 
@@ -59,7 +71,6 @@ class expensesController extends Controller
                     $file->storeAs('public/expenses', $filename);
                 }
             }
-
             // إضافة البيانات إلى قاعدة البيانات
             expenses::create([
                 'user_id' => auth()->id(),

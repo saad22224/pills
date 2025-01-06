@@ -12,9 +12,20 @@ class IncomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $incomes = auth()->user()->income()->paginate(5);
+        // استدعاء الفواتير
+        $query = income::query();
+
+        // فلترة بالتاريخ إذا تم التحديد
+        if ($request->has('date_from') && $request->has('date_to')) {
+            $query->where('date_from' , $request->date_from)->orWhere('date_to' , $request->date_to);
+        }
+
+        // جلب النتائج مع ترقيم الصفحات
+        $incomes = $query->paginate(10);
+
+        // عرض الصفحة مع النتائج
         return view('dashboard.income', compact('incomes'));
     }
 
@@ -123,7 +134,7 @@ class IncomeController extends Controller
      * @param  \App\Models\income  $income
      * @return \Illuminate\Http\Response
      */
-    public function destroy(income $id)
+    public function destroy($id)
     {
         income::findOrFail($id)->delete();
         return redirect()->route('income.index')->with('success', 'income deleted successfully');

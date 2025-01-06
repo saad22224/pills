@@ -105,7 +105,7 @@
                                 <i class="icon-moon"></i>
                             </div>
                             <div class="popup-wrap noti type-header">
-                                <div class="dropdown">
+                                <!-- <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button"
                                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         <span class="header-item">
@@ -113,7 +113,7 @@
                                             <i class="icon-bell"></i>
                                         </span>
                                     </button>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="header-item button-zoom-maximize">
                                 <div class="">
@@ -175,8 +175,8 @@
                                         </div>
                                         <input class="mb-10" type="text" placeholder="invoices name" name="title"
                                             tabindex="0" value="" aria-required="true" required="">
-                                        <div class="text-tiny">لا تتجاوز 20 حرفًا عند إدخال المنتج
-                                            اسم.</div>
+                                        <!-- <div class="text-tiny">لا تتجاوز 20 حرفًا عند إدخال المنتج
+                                            اسم.</div> -->
                                     </fieldset>
 
                                     <div class="gap22 cols">
@@ -204,13 +204,13 @@
                                         </div>
                                         <textarea class="mb-10" name="description" placeholder="description" tabindex="0"
                                             aria-required="true" required=""></textarea>
-                                        <div class="text-tiny">لا تتجاوز 100 حرف عند الدخول
-                                            اسم المنتج.</div>
+                                        <!-- <div class="text-tiny">لا تتجاوز 100 حرف عند الدخول
+                                            اسم المنتج.</div> -->
                                     </fieldset>
                                 </div>
                                 <div dir="rtl" class="wg-box">
                                     <fieldset>
-                                        <div class="body-title mb-10">ارفق الصور</div>
+                                        <div class="body-title mb-10">add picture</div>
                                         <div class="upload-image mb-16">
                                             <div class="item">
                                                 <img src="images/upload/upload-1.png" alt="">
@@ -224,19 +224,19 @@
                                                     <span class="icon">
                                                         <i class="icon-upload-cloud"></i>
                                                     </span>
-                                                    <span class="text-tiny">أسقط صورك هنا أو اختر <span class="tf-color">click to browse</span></span>
+                                                    <span class="text-tiny"> add picture here <span class="tf-color">click to browse</span></span>
                                                     <input type="file" id="myFile" name="invoice_image" accept="image/*" onchange="previewImage(event)">
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="body-text">
+                                        <!-- <div class="body-text">
                                             تحتاج إلى إضافة 4 صور على الأقل. انتبه إلى جودة الصور التي تضيفها، والتزم بمعايير ألوان الخلفية. يجب أن تكون الصور بأبعاد معينة. لاحظ أن المنتج يظهر كافة التفاصيل.
-                                        </div>
+                                        </div> -->
                                     </fieldset>
 
 
                                     <div class="col-12">
-                                        <button class="tf-button w-full" type="submit">اضافة المنتج</button>
+                                        <button class="tf-button w-full" type="submit">add invoice </button>
                                     </div>
                                 </div>
                             </form>
@@ -335,34 +335,34 @@
                                 </div>
                                 <div dir="rtl" class="wg-box">
                                     <fieldset>
-                                        <div class="body-title mb-10">ارفق الصور</div>
+                                        <div class="body-title mb-10">add picture </div>
                                         <div class="upload-image mb-16">
                                             <div class="item">
                                                 <img src="images/upload/upload-1.png" alt="">
                                             </div>
                                             <div class="item">
                                                 <!-- المعاينة هنا -->
-                                                <img id="imagePreview" src="" alt="" style="max-width: 100%; height: auto;">
+                                                <img id="" src="" alt="" style="max-width: 100%; height: auto;">
                                             </div>
                                             <div class="item up-load">
                                                 <label class="uploadfile" for="myFile">
                                                     <span class="icon">
                                                         <i class="icon-upload-cloud"></i>
                                                     </span>
-                                                    <span class="text-tiny">أسقط صورك هنا أو اختر <span class="tf-color">click to browse</span></span>
-                                                    <input type="file" id="myFile" name="expenses_image" accept="image/*" onchange="previewImage(event)">
+                                                    <span class="text-tiny">   add picture here <span class="tf-color">click to browse</span></span>
+                                                    <input type="file" name="expenses_image" accept="image/*">
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="body-text">
+                                        <!-- <div class="body-text">
                                             تحتاج إلى إضافة 4 صور على الأقل. انتبه إلى جودة الصور التي تضيفها، والتزم بمعايير ألوان الخلفية. يجب أن تكون الصور بأبعاد معينة. لاحظ أن المنتج يظهر كافة التفاصيل.
-                                        </div>
+                                        </div> -->
                                     </fieldset>
 
 
 
                                     <div class="col-12">
-                                        <button class="tf-button w-full" type="submit">اضافة المنتج</button>
+                                        <button class="tf-button w-full" type="submit">add expenses </button>
                                     </div>
                                 </div>
                             </form>
@@ -399,7 +399,7 @@
                                     <div id="amount_field_side_job" style="display: none;">
                                         <fieldset class="category">
                                             <div class="body-title mb-10">amount <span class="tf-color-1">*</span></div>
-                                            <input id="amount" name="" type="number" placeholder="amount" min="1" >
+                                            <input id="amount" type="number" placeholder="amount" min="1">
                                         </fieldset>
                                     </div>
 
@@ -428,7 +428,15 @@
                                     <div id="credit_field" style="display: none;">
                                         <fieldset class="category">
                                             <div class="body-title mb-10">credit amount</div>
-                                            <input id="credit" name="credit" type="number" placeholder="credit amount" min="0">
+                                            <input id="credit" type="number" placeholder="credit amount" min="0">
+                                        </fieldset>
+                                    </div>
+
+                                    <!-- حقل عدد الوظائف يظهر فقط عند اختيار company job -->
+                                    <div id="job_count_field" style="display: none;">
+                                        <fieldset class="category">
+                                            <div class="body-title mb-10">number of jobs</div>
+                                            <input id="job_count" type="number" placeholder="number of jobs" min="0">
                                         </fieldset>
                                     </div>
 
@@ -449,12 +457,12 @@
                                     <!-- عرض وحفظ total amount -->
                                     <div>
                                         <span>total amount:</span>
-                                        <input type="text" id="total_amount" name="total_amount" value="0" readonly>
+                                        <input type="text" id="total_amount" name="total_amount" value="0">
                                     </div>
 
                                     <!-- زر الإضافة -->
                                     <div class="col-12">
-                                        <button class="tf-button w-full" type="submit">اضافة المنتج</button>
+                                        <button class="tf-button w-full" type="submit">add income </button>
                                     </div>
                                 </div>
                             </form>
@@ -467,31 +475,34 @@
                                     const cashTypeField = document.getElementById("cash_type_field");
                                     const cashFields = document.getElementById("cash_fields");
                                     const creditField = document.getElementById("credit_field");
+                                    const jobCountField = document.getElementById("job_count_field");
                                     const totalAmountInput = document.getElementById("total_amount");
                                     const amountInput = document.getElementById("amount");
                                     const cashInHandInput = document.getElementById("cash_in_hand");
                                     const cashAppInput = document.getElementById("cash_app");
                                     const creditInput = document.getElementById("credit");
+                                    const jobCountInput = document.getElementById("job_count");
 
-                                    // التعامل مع اختيار نوع الدخل
                                     incomeType.addEventListener("change", () => {
                                         if (incomeType.value === "side_job") {
                                             amountFieldSideJob.style.display = "block";
                                             cashTypeField.style.display = "none";
+                                            jobCountField.style.display = "none";
                                             hideCashFields();
                                         } else if (incomeType.value === "company_job") {
                                             amountFieldSideJob.style.display = "none";
                                             cashTypeField.style.display = "block";
+                                            jobCountField.style.display = "block";
                                             hideCashFields();
                                         } else {
                                             amountFieldSideJob.style.display = "none";
                                             cashTypeField.style.display = "none";
+                                            jobCountField.style.display = "none";
                                             hideCashFields();
                                         }
                                         calculateTotal();
                                     });
 
-                                    // التعامل مع اختيار cash type
                                     cashType.addEventListener("change", () => {
                                         if (cashType.value === "cash") {
                                             cashFields.style.display = "block";
@@ -505,57 +516,39 @@
                                         calculateTotal();
                                     });
 
-                                    // إخفاء الحقول المرتبطة بالكاش أو الكريديت
                                     function hideCashFields() {
                                         cashFields.style.display = "none";
                                         creditField.style.display = "none";
                                     }
 
-                                    // حساب total amount
                                     function calculateTotal() {
                                         let totalAmount = 0;
 
                                         if (incomeType.value === "side_job") {
                                             totalAmount = parseFloat(amountInput.value) || 0;
                                         } else if (incomeType.value === "company_job") {
+                                            const jobCount = parseInt(jobCountInput.value) || 0;
                                             if (cashType.value === "cash") {
                                                 const cashInHand = parseFloat(cashInHandInput.value) || 0;
                                                 const cashApp = parseFloat(cashAppInput.value) || 0;
-                                                totalAmount = cashInHand + cashApp;
+                                                totalAmount = cashInHand + cashApp - (jobCount * 3);
                                             } else if (cashType.value === "credit") {
                                                 const creditAmount = parseFloat(creditInput.value) || 0;
-                                                totalAmount = creditAmount - (creditAmount * 0.03); // خصم 3%
+                                                totalAmount = creditAmount - (creditAmount * 0.03) - (jobCount * 3);
                                             }
                                         }
 
-                                        totalAmountInput.value = totalAmount.toFixed(2);
+                                        // تحديث القيمة في الحقل مع الإبقاء على الكسور
+                                        totalAmountInput.value = totalAmount.toString();
                                     }
 
-                                    // تحديث total amount عند تغيير أي قيمة
+
                                     document.querySelectorAll("input, select").forEach((element) => {
                                         element.addEventListener("input", calculateTotal);
                                     });
-
-                                    // التأكد من إرسال البيانات بشكل صحيح
-                                    document.querySelector("form").addEventListener("submit", (event) => {
-                                        if (incomeType.value === "company_job") {
-                                            if (cashType.value === "choose" || (cashType.value === "cash" && (isNaN(cashInHandInput.value) || isNaN(cashAppInput.value)))) {
-                                                // إذا تم اختيار company_job و cash_type غير محدد أو البيانات غير مكتملة، نمنع إرسال النموذج
-                                                alert("Please select cash type and provide required values.");
-                                                event.preventDefault();
-                                                return;
-                                            }
-
-                                            if (cashType.value === "credit" && isNaN(creditInput.value)) {
-                                                // إذا كان cash_type هو credit ولم يتم إدخال قيمة، نمنع الإرسال
-                                                alert("Please provide a credit amount.");
-                                                event.preventDefault();
-                                                return;
-                                            }
-                                        }
-                                    });
                                 });
                             </script>
+
 
                             <!-- /form-add-product -->
                         </div>

@@ -1,4 +1,45 @@
 @include('dashboard.layouts.header')
+<style>
+    /* تخصيص الباجينايشن */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .pagination .page-item {
+        border-radius: 50%;
+    }
+
+    .pagination .page-link {
+        border-radius: 50%;
+        padding: 10px 15px;
+        font-size: 14px;
+        color: #333;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .pagination .page-link:hover {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+
+    .pagination .page-item.disabled .page-link {
+        background-color: #f8f9fa;
+        color: #6c757d;
+        border-color: #ddd;
+    }
+</style>
 
 <body class="body">
 
@@ -71,7 +112,7 @@
                                                 </a>
                                             </li>
                                             <li class="sub-menu-item">
-                                            <a href="{{route('income.index')}}" class="">
+                                                <a href="{{route('income.index')}}" class="">
                                                     <div class="text">income</div>
                                                 </a>
                                             </li>
@@ -107,7 +148,7 @@
                                     <i class="icon-moon"></i>
                                 </div>
                                 <div class="popup-wrap noti type-header">
-                                    <div class="dropdown">
+                                    <!-- <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-item">
@@ -115,7 +156,7 @@
                                                 <i class="icon-bell"></i>
                                             </span>
                                         </button>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="header-item button-zoom-maximize">
                                     <div class="">
@@ -158,13 +199,31 @@
                         <div class="main-content-inner">
                             <!-- main-content-wrap -->
                             <div class="main-content-wrap">
+                                <div class="wg-filter flex-grow">
+                                    <form method="GET" action="{{ route('income.index') }}" class="form-search flex items-center gap10">
+                                        <fieldset class="name">
+                                            <label for="date_from">From:</label>
+                                            <input type="date" name="date_from" id="date" value="{{ request('date_from') }}">
+                                        </fieldset>
+                                        <fieldset class="name">
+                                            <label for="date_to">To:</label>
+                                            <input type="date" name="date_to" id="date" value="{{ request('date_to') }}">
+                                        </fieldset>
+                                        <button class="tf-button style-1" type="submit">
+                                            <i class="icon-search"></i> Filter
+                                        </button>
+                                        <a href="{{ route('income.index') }}" class="tf-button">Reset</a>
+                                    </form>
+                                    <button id="print-btn" class="tf-button style-2">
+                                        <i class="icon-printer"></i> Print
+                                    </button>
+                                </div>
 
-                               <!-- product-list -->
-                               <div class="wg-box">
+                                <!-- product-list -->
+                                <div class="wg-box">
                                     <div class="title-box">
                                         <i class="icon-coffee"></i>
-                                        <div class="body-text">نصيحة للبحث حسب معرف المنتج: يتم تزويد كل منتج بمعرف فريد
-                                            يمكنك الاعتماد عليه للعثور على المنتج الدقيق الذي تحتاجه.</div>
+                                        <div class="body-text">Search by date: You can rely on the date to find the exact invoice you need."</div>
                                     </div>
                                     <div class="flex items-center justify-between gap10 flex-wrap">
                                         <div class="wg-filter flex-grow">
@@ -181,7 +240,7 @@
 
 
                                     </div>
-                                    <div class="wg-table table-product-list">
+                                    <div class="wg-table table-product-list" id="table-to-print">
                                         <ul class="table-title flex gap20 mb-14">
                                             <li>
                                                 <div class="body-title">invoice name</div>
@@ -210,13 +269,13 @@
                                             <li class="product-item gap14">
 
                                                 <div class="flex items-center justify-between gap20 flex-grow">
-                                                    <div class="name">
-                                                        <a href="product-list.html" class="body-title-2">
-                                                            {{$income->title}} </a>
-                                                    </div>
-                                                    <div class="body-text"  style="transform:translateX(30%)"> {{$income->total_amount}}</div>
+                                                    <div class="name" style="font-size: 17px;">
 
-                                                    <div class="body-text"  style="transform:translateX(17%)"> {{$income->date_from}}</div>
+                                                        {{$income->title}}
+                                                    </div>
+                                                    <div class="body-text" style="transform:translateX(30%)"> {{$income->total_amount}}</div>
+
+                                                    <div class="body-text" style="transform:translateX(17%)"> {{$income->date_from}}</div>
                                                     <div class="body-text"> {{$income->date_to}}</div>
                                                     <div class="body-text"> {{$income->income_type}}</div>
 
@@ -274,6 +333,75 @@
     <!-- /#wrapper -->
 
     @include('dashboard.layouts.footer')
+    <!-- تحميل jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- تحميل autoTable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr("#date", {
+                dateFormat: "Y-m-d", // تنسيق التاريخ
+                locale: "en" // اللغة
+            });
+        })
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById("print-btn").addEventListener("click", function() {
+                const {
+                    jsPDF
+                } = window.jspdf;
+                const doc = new jsPDF();
+
+                // احصل على الـ wrapper الذي يحتوي على المحتوى الذي تريد طباعته
+                const content = document.getElementById('table-to-print');
+
+                if (!content) {
+                    console.error("Content not found.");
+                    return; // لا تتابع إذا لم يتم العثور على العنصر
+                }
+
+                const rows = [];
+                const items = content.querySelectorAll('.product-item'); // تحديد العناصر التي تحتوي على البيانات
+
+                if (items.length > 0) {
+                    items.forEach(item => {
+                        const rowData = [];
+                        const title = item.querySelector('.name');
+                        const price = item.querySelector('.body-text');
+                        const dateFrom = item.querySelectorAll('.body-text')[1]; // تأكد من اختيار التاريخ الأول (date_from)
+                        const dateTo = item.querySelectorAll('.body-text')[2]; // تأكد من اختيار التاريخ الثاني (date_to)
+                        const incomeType = item.querySelectorAll('.body-text')[3]; // اختيار نوع الدخل (income_type)
+
+                        // أضف البيانات إلى الصف
+                        rowData.push(title ? title.innerText : '');
+                        rowData.push(price ? price.innerText : '');
+                        rowData.push(dateFrom ? dateFrom.innerText : ''); // أضف تاريخ البداية
+                        rowData.push(dateTo ? dateTo.innerText : ''); // أضف تاريخ النهاية
+                        rowData.push(incomeType ? incomeType.innerText : ''); // أضف نوع الدخل
+
+                        rows.push(rowData);
+                    });
+
+                    // إضافة البيانات إلى PDF
+                    doc.autoTable({
+                        head: [
+                            ["Income Name", "Price", " From", " To", "Income Type"]
+                        ], // حدد الأعمدة التي تريدها
+                        body: rows,
+                    });
+
+                    // حفظ PDF
+                    doc.save("income-list.pdf");
+                } else {
+                    console.error("No items found in the content.");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

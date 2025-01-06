@@ -105,7 +105,7 @@
                                 <i class="icon-moon"></i>
                             </div>
                             <div class="popup-wrap noti type-header">
-                                <div class="dropdown">
+                                <!-- <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button"
                                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         <span class="header-item">
@@ -113,7 +113,7 @@
                                             <i class="icon-bell"></i>
                                         </span>
                                     </button>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="header-item button-zoom-maximize">
                                 <div class="">
@@ -274,7 +274,7 @@
 
 
                                     <div class="col-12">
-                                        <button class="tf-button w-full" type="submit">اضافة المنتج</button>
+                                        <button class="tf-button w-full" type="submit">update</button>
                                     </div>
                                 </div>
                             </form>

@@ -147,7 +147,7 @@
                                     <i class="icon-moon"></i>
                                 </div>
                                 <div class="popup-wrap noti type-header">
-                                    <div class="dropdown">
+                                    <!-- <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-item">
@@ -155,7 +155,7 @@
                                                 <i class="icon-bell"></i>
                                             </span>
                                         </button>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="header-item button-zoom-maximize">
                                     <div class="">
@@ -198,13 +198,28 @@
                         <div class="main-content-inner">
                             <!-- main-content-wrap -->
                             <div class="main-content-wrap">
+                            <div class="wg-filter flex-grow">
+                                    <form method="GET" action="{{ route('expenses.index') }}" class="form-search flex items-center gap10">
+                                        <fieldset class="name">
+                                            <label for="date_from">From:</label>
+                                            <input type="date" name="date" id="date" value="{{ request('date_from') }}">
+                                        </fieldset>
 
+                                        <button class="tf-button style-1" type="submit">
+                                            <i class="icon-search"></i> Filter
+
+                                        </button>
+                                        <a href="{{ route('expenses.index') }}" class="tf-button">Reset</a>
+                                    </form>
+                                    <button id="print-btn" class="tf-button">
+                                        <i class="icon-printer"></i> Print
+                                    </button>
+                                </div>
                                 <!-- product-list -->
                                 <div class="wg-box">
                                     <div class="title-box">
                                         <i class="icon-coffee"></i>
-                                        <div class="body-text">نصيحة للبحث حسب معرف المنتج: يتم تزويد كل منتج بمعرف فريد
-                                            يمكنك الاعتماد عليه للعثور على المنتج الدقيق الذي تحتاجه.</div>
+                                        <div class="body-text">Search by date: You can rely on the date to find the exact invoice you need."</div>
                                     </div>
                                     <div class="flex items-center justify-between gap10 flex-wrap">
                                         <div class="wg-filter flex-grow">
@@ -222,11 +237,11 @@
                                         <a class="tf-button style-1 w208" href="{{route('addpage.index')}}"><i
                                                 class="icon-plus"></i>add expenses</a>
                                     </div>
-                                    <div class="wg-table table-product-list">
+                                    <div class="wg-table table-product-list" id="table-to-print">
                                         <ul class="table-title flex gap20 mb-14">
                                             <li>
                                                 <div class="body-title">expenses name</div>
-                                            </li>d
+                                            </li>
                                             <li>
                                                 <div class="body-title"> price </div>
                                             </li>
@@ -257,9 +272,9 @@
                                                     <img src="{{ asset('storage/expenses/' . $expense->expenses_image) }}" alt="">
                                                 </div>
                                                 <div class="flex items-center justify-between gap20 flex-grow">
-                                                    <div class="name">
-                                                        <a href="product-list.html" class="body-title-2">
-                                                            {{$expense->title}} </a>
+                                                    <div class="name" style="font-size: 17px;">
+
+                                                            {{$expense->title}}
                                                     </div>
                                                     <div class="body-text"> {{$expense->price}}</div>
 
@@ -319,6 +334,72 @@
             <!-- /#wrapper -->
         </div>
         @include('dashboard.layouts.footer')
+        <!-- تحميل jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- تحميل autoTable -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                flatpickr("#date", {
+                    dateFormat: "Y-m-d", // تنسيق التاريخ
+                    locale: "en" // اللغة
+                });
+            })
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById("print-btn").addEventListener("click", function() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // احصل على الـ wrapper الذي يحتوي على المحتوى الذي تريد طباعته
+            const content = document.getElementById('table-to-print');
+
+            if (!content) {
+                console.error("Content not found.");
+                return; // لا تتابع إذا لم يتم العثور على العنصر
+            }
+
+            const rows = [];
+            const items = content.querySelectorAll('.product-item');
+
+            if (items.length > 0) {
+                items.forEach(item => {
+                    const rowData = [];
+                    const title = item.querySelector('.name');
+                    const price = item.querySelector('.body-text');
+                    const date = item.querySelectorAll('.body-text')[1];
+                    const description = item.querySelectorAll('.body-text')[2];
+
+                    // أضف البيانات إلى الصف
+                    rowData.push(title ? title.innerText : '');
+                    rowData.push(price ? price.innerText : '');
+                    rowData.push(date ? date.innerText : '');
+                    rowData.push(description ? description.innerText : '');
+
+                    rows.push(rowData);
+                });
+
+                // إضافة البيانات إلى PDF
+                doc.autoTable({
+                    head: [["Expenses Name", "Price", "Date", "Description"]],  // حدد الأعمدة التي تريدها
+                    body: rows,
+                });
+
+                // حفظ PDF
+                doc.save("invoice-list.pdf");
+            } else {
+                console.error("No items found in the content.");
+            }
+        });
+    });
+
+
+
+        </script>
 </body>
 
 </html>
