@@ -16,13 +16,11 @@ class invoicesControlle extends Controller
     {
         // جلب جميع الفواتير بشكل افتراضي
         $query = Invoices::query();
-
         // التحقق من وجود تواريخ للفلترة
         if ($request->has('date')  && $request->date) {
             // إذا تم اختيار تواريخ، يتم فلترة النتائج
             $query->where('date', $request->date);
         }
-
         // جلب النتائج مع ترقيم الصفحات
         $invoices = $query->paginate(10);
 

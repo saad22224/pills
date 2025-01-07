@@ -6,6 +6,7 @@ use App\Http\Controllers\expensesController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\invoicesControlle;
 use App\Http\Controllers\Invoices_ExportController;
+use App\Http\Controllers\LinksController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -57,6 +58,13 @@ Route::get('/income', [Controller::class, 'incomePage'])->name('incomePage.index
 Route::middleware('auth')->group(function () {
     Route::resource('invoices', invoicesControlle::class);
 });
+// invoices links
+Route::middleware('auth')->group(function () {
+    Route::post('/invoices/create-share-link', [LinksController::class, 'createShareLink'])->name('invoices.create-share-link');
+});
+
+Route::get('/user/invoices/share/{token}', [LinksController::class, 'viewSharedInvoices'])->name('user.invoices.share');
+
 
 
 
@@ -69,3 +77,5 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('income', IncomeController::class);
 });
+
+

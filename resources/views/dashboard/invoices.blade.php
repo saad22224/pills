@@ -200,6 +200,19 @@
                             <!-- main-content-wrap -->
                             <div class="main-content-wrap">
                                 <div class="wg-filter flex-grow">
+                                    @if(session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                    @endif
+                                    <!-- زر إنشاء رابط مشاركة -->
+                                    <form method="POST" action="{{ route('invoices.create-share-link') }}">
+                                        @csrf
+                                        <button class="tf-button style-1 w208" type="submit">
+                                            <i class="icon-link"></i> Create Share Link
+                                        </button>
+                                    </form>
+                                 
                                     <form method="GET" action="{{ route('invoices.index') }}" class="form-search flex items-center gap10">
                                         <fieldset class="name">
                                             <label for="date_from">From:</label>
