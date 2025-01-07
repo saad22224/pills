@@ -106,7 +106,7 @@
                                             </li>
 
                                             <li>
-                                                <div class="body-title" style="transform: translateX(-10%);">price</div>
+                                                <div class="body-title" >price</div>
                                             </li>
                                             <li>
                                                 <div class="body-title" style="transform: translateX(-10%);">date</div>
