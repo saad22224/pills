@@ -165,6 +165,7 @@
 
 
                         <!-- main-content-wrap -->
+                        <!-- invoices -->
                         <div class="main-content-wrap" id="invoices" style="display: none;">
                             <!-- form-add-product -->
                             <form class="tf-section-2 form-add-product" enctype="multipart/form-data" action="{{route('invoices.store')}}" method="Post">
@@ -216,7 +217,7 @@
                                                 <img src="images/upload/upload-1.png" alt="">
                                             </div>
                                             <div class="item">
-                                                <!-- المعاينة هنا -->
+
                                                 <img id="imagePreview" src="" alt="" style="max-width: 100%; height: auto;">
                                             </div>
                                             <div class="item up-load">
@@ -229,9 +230,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <!-- <div class="body-text">
-                                            تحتاج إلى إضافة 4 صور على الأقل. انتبه إلى جودة الصور التي تضيفها، والتزم بمعايير ألوان الخلفية. يجب أن تكون الصور بأبعاد معينة. لاحظ أن المنتج يظهر كافة التفاصيل.
-                                        </div> -->
+
                                     </fieldset>
 
 
@@ -249,6 +248,7 @@
 
 
                         <!-- main-content-wrap -->
+                        <!-- expenses -->
                         <div class="main-content-wrap" id="expenses" style="display: none;">
                             <!-- form-add-product -->
                             <form class="tf-section-2 form-add-product" enctype="multipart/form-data" action="{{route('expenses.store')}}" method="Post">
@@ -342,21 +342,18 @@
                                             </div>
                                             <div class="item">
                                                 <!-- المعاينة هنا -->
-                                                <img id="" src="" alt="" style="max-width: 100%; height: auto;">
+                                                <img id="images/upload/upload-1.png" src="" alt="" style="max-width: 100%; height: auto;">
                                             </div>
                                             <div class="item up-load">
-                                                <label class="uploadfile" for="myFile">
+                                                <label class="uploadfile" for="expensesFile">
                                                     <span class="icon">
                                                         <i class="icon-upload-cloud"></i>
                                                     </span>
-                                                    <span class="text-tiny">   add picture here <span class="tf-color">click to browse</span></span>
-                                                    <input type="file" name="expenses_image" accept="image/*">
+                                                    <span class="text-tiny"> add picture here <span class="tf-color">click to browse</span></span>
+                                                    <input type="file" id="expensesFile" name="expenses_image" accept="image/*">
                                                 </label>
                                             </div>
                                         </div>
-                                        <!-- <div class="body-text">
-                                            تحتاج إلى إضافة 4 صور على الأقل. انتبه إلى جودة الصور التي تضيفها، والتزم بمعايير ألوان الخلفية. يجب أن تكون الصور بأبعاد معينة. لاحظ أن المنتج يظهر كافة التفاصيل.
-                                        </div> -->
                                     </fieldset>
 
 
@@ -377,6 +374,7 @@
 
 
                         <!-- main-content-wrap -->
+                        <!-- income -->
                         <div class="main-content-wrap" id="income" style="display: none;">
                             <form class="tf-section-2 form-add-product" enctype="multipart/form-data" action="{{route('income.store')}}" method="Post" id="incomeForm">
                                 @csrf
