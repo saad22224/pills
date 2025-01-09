@@ -161,9 +161,7 @@
                             <option value="income" id="">income</option>
                         </select>
 
-
-
-
+                    
                         <!-- main-content-wrap -->
                         <!-- invoices -->
                         <div class="main-content-wrap" id="invoices" style="display: none;">
